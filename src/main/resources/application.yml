@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: csv-watcher
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+    producer:
+      key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      acks: all
+      properties:
+        enable.idempotence: true
+    properties:
+      schema.registry.url: ${KAFKA_SCHEMA_REGISTRY_URL:http://schema-registry:8081}
+
+app:
+  kafka:
+    topic: ${KAFKA_FILE_READY_TOPIC:file.ready}
+  watcher:
+    directory: ${WATCH_DIRECTORY:/basketball-data}
+    stability-checks: ${WATCH_STABILITY_CHECKS:3}
+    stability-interval: ${WATCH_STABILITY_INTERVAL:1s}
