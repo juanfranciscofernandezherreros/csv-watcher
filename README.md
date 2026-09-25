@@ -1,7 +1,6 @@
 # csv-watcher
 
-Versión actual: **1.0.5**.
-
+![version](https://img.shields.io/badge/version-1.0.5-blue)
 Microservicio Spring Boot/JDK 21 que observa un directorio compartido y publica un evento Avro en `file.ready` por cada CSV nuevo o modificado. Clasifica `SEASONS`, `RESULTS`, `FIXTURES`, `POINT_BY_POINT`, `MATCH_SUMMARY` y `STATS_PLAYER`; `csv-file-event-router` dirige después cada evento al consumidor correspondiente.
 
 El identificador se calcula con la ruta relativa y el SHA-256 del contenido. Por ello, el mismo fichero genera la misma clave y los consumidores downstream pueden deduplicar mensajes con semántica al menos una vez.
