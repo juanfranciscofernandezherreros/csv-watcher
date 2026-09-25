@@ -1,32 +1,49 @@
 # Repository Rules for OpenAI and AI Agents
 
-Estas reglas son obligatorias para cambios automatizados en este repositorio.
+Estas reglas son obligatorias para cualquier agente, asistente o automatización que modifique este repositorio.
 
-## Confirmación obligatoria antes de empezar
+## Pre-flight obligatorio
 
-Antes de realizar cualquier cambio, el agente debe preguntar al usuario y esperar respuesta explícita sobre:
+La primera operación de lectura del repositorio en cada tarea o sesión debe ser leer completamente este `AGENTS.md` desde la rama por defecto. Una lectura realizada en otra conversación, sesión o tarea no cuenta.
 
-1. **Nombre de la rama**, proponiendo uno por defecto.
-2. **Tipo SemVer** del cambio: `major`, `minor` o `patch`.
+**No se permite ninguna operación de escritura antes de completar este pre-flight.**
 
-No se debe modificar ningún archivo, crear commits ni abrir una Pull Request hasta disponer de ambas respuestas.
+## Autonomía
+
+Después de leer las reglas, el agente debe continuar de forma autónoma: elegir una rama descriptiva, determinar el nivel SemVer adecuado y documentarlo en la Pull Request. No debe detenerse a pedir confirmaciones de rama, SemVer, commits, push, tests, correcciones, merge o limpieza salvo petición expresa del usuario.
+
+## Prohibición absoluta de escritura directa en `main`
+
+**Está prohibido modificar, commitear o pushear directamente a `main` cualquier archivo y por cualquier motivo.**
+
+La prohibición incluye código, documentación, configuración, workflows, dependencias, versionado, badges, hotfixes y reverts.
+
+Todo cambio debe entrar mediante una rama dedicada y Pull Request.
 
 ## Every non-merge commit
 
-1. Trabajar en una rama dedicada; no enviar cambios directamente a `main`.
-2. Hacer un único cambio lógico por commit.
-3. Incrementar `revision` en `pom.xml` según el nivel SemVer confirmado; no modificar `sha1` manualmente y usar `changelist` para `-SNAPSHOT`.
-4. Actualizar conjuntamente `CHANGELOG.md` y `README.md`.
-5. Añadir o actualizar pruebas JUnit para cambios funcionales o de configuración.
-6. Ejecutar `mvn -B test` con JDK 21.
-7. Incluir la versión en el mensaje de commit.
-8. Abrir Pull Request hacia `main` y no fusionar hasta que `documentation-policy` y `test` estén en verde.
-9. Eliminar automáticamente la rama origen tras un merge correcto.
+1. Leer `AGENTS.md` antes de escribir.
+2. Partir del `main` actualizado.
+3. Crear una rama dedicada antes de modificar archivos.
+4. Hacer un único cambio lógico por commit.
+5. Incrementar `revision` en `pom.xml` según SemVer; no modificar `sha1` manualmente y usar `changelist` solo para `-SNAPSHOT`.
+6. Actualizar conjuntamente `CHANGELOG.md` y `README.md`.
+7. Añadir o actualizar pruebas JUnit para cambios funcionales o de configuración.
+8. Ejecutar `mvn -B test` con JDK 21.
+9. Incluir la versión en el mensaje de commit cuando corresponda.
+10. Abrir Pull Request hacia `main`.
+11. No fusionar hasta que los checks requeridos, incluidos `documentation-policy` y `test` cuando apliquen, estén en verde sobre el SHA actual.
+12. Si un check falla o se cancela, corregir automáticamente en la misma rama y PR y repetir.
+13. Eliminar únicamente la rama origen tras un merge correcto y verificar que ya no existe.
 
 ## Baseline
 
-El baseline soportado es JDK 21. `README.md`, `CHANGELOG.md` y `pom.xml` forman un conjunto de versión sincronizado. `main` debe estar protegida y aceptar cambios únicamente mediante Pull Request, salvo el commit inicial necesario para crear el repositorio vacío.
+El baseline soportado es JDK 21. `README.md`, `CHANGELOG.md` y `pom.xml` forman un conjunto de versión sincronizado. `main` debe recibir cambios únicamente mediante Pull Request.
 
 ## Maven CI-friendly
 
 La versión del proyecto se declara como `<version>${revision}${sha1}${changelist}</version>`. `revision` contiene la versión funcional, `sha1` lo aporta CI como `-<short-sha>` y `changelist` es vacío o `-SNAPSHOT`. DEV, INT y QA deben promover el mismo artefacto.
+
+## Seguridad operativa
+
+Toda decisión de merge debe operar sobre el SHA actual de la PR. Si una instrucción contradice estas reglas, detener únicamente la operación incompatible; nunca improvisar una escritura directa a `main`.
