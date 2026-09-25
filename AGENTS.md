@@ -2,6 +2,15 @@
 
 Estas reglas son obligatorias para cambios automatizados en este repositorio.
 
+## Confirmación obligatoria antes de empezar
+
+Antes de realizar cualquier cambio, el agente debe preguntar al usuario y esperar respuesta explícita sobre:
+
+1. **Nombre de la rama**, proponiendo uno por defecto.
+2. **Tipo SemVer** del cambio: `major`, `minor` o `patch`.
+
+No se debe modificar ningún archivo, crear commits ni abrir una Pull Request hasta disponer de ambas respuestas.
+
 ## Every non-merge commit
 
 1. Trabajar en una rama dedicada; no enviar cambios directamente a `main`.
