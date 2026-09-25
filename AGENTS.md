@@ -32,9 +32,11 @@ Todo cambio debe entrar mediante una rama dedicada y Pull Request.
 8. Ejecutar `mvn -B test` con JDK 21.
 9. Incluir la versión en el mensaje de commit cuando corresponda.
 10. Abrir Pull Request hacia `main`.
-11. No fusionar hasta que los checks requeridos, incluidos `documentation-policy` y `test` cuando apliquen, estén en verde sobre el SHA actual.
+11. No fusionar hasta que los checks requeridos, incluidos `documentation-policy`, `test` y `CI-friendly non-production version` cuando apliquen, estén en verde sobre el SHA actual.
 12. Si un check falla o se cancela, corregir automáticamente en la misma rama y PR y repetir.
-13. Eliminar únicamente la rama origen tras un merge correcto y verificar que ya no existe.
+13. Cuando todos los checks requeridos/aplicables del SHA actual estén en verde, fusionar automáticamente la Pull Request sin pedir autorización adicional.
+14. Eliminar únicamente la rama origen tras un merge correcto y verificar que ya no existe.
+15. El trabajo no se considera terminado hasta que la PR esté fusionada y la rama origen haya sido eliminada y verificada.
 
 ## Baseline
 
