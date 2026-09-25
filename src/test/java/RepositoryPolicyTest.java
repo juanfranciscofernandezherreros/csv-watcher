@@ -10,9 +10,10 @@ class RepositoryPolicyTest {
         String readme = Files.readString(Path.of("README.md"));
         String changelog = Files.readString(Path.of("CHANGELOG.md"));
         assertTrue(pom.contains("<java.version>21</java.version>"));
-        assertTrue(pom.contains("<version>1.0.3</version>"));
+        assertTrue(pom.contains("<version>${revision}${sha1}${changelist}</version>"));
+        assertTrue(pom.contains("<revision>1.0.4</revision>"));
         assertTrue(readme.contains("mvn -B test"));
-        assertTrue(changelog.contains("## 1.0.3"));
+        assertTrue(changelog.contains("## 1.0.4"));
         assertTrue(Files.exists(Path.of("AGENTS.md")));
         assertTrue(Files.exists(Path.of(".github/workflows/documentation-policy.yml")));
         assertTrue(Files.exists(Path.of(".github/workflows/test.yml")));
