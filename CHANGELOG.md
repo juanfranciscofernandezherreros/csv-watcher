@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6 - 2026-09-25
+
+- [patch] Refuerza AGENTS.md con lectura obligatoria por tarea, autonomía y prohibición absoluta de escrituras directas en main.
+
 ## 1.0.5 - 2026-09-25
 
 - [patch] Exige confirmar nombre de rama y nivel SemVer antes de cualquier cambio.
