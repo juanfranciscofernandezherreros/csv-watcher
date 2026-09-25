@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4 - 2026-09-25
+
+- [patch] Exige confirmar nombre de rama y nivel SemVer antes de cualquier cambio.
+- [patch] Adopta Maven CI-friendly con `revision`, `sha1` y `changelist`.
+
 ## 1.0.3 - 2026-09-24
 
 - Publica `csv-watcher` como repositorio independiente.
